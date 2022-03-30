@@ -1,17 +1,21 @@
-from .base_model import BaseModel
-from .res_baseline import ResGenModel
-from .res_cls import ResClsModel
+"""
+Created on Dec 13, 2018
+@author: Yuedong Chen
+"""
+
+from .base_solver import BaseSolver
+from .res_cls_solver import ResFaceClsSolver
+from .res_solver import ResFaceSolver
 
 
 
-def create_model(opt):
-    # specify model name here
-    if opt.model == "res_baseline":
-        instance = ResGenModel()
-    elif opt.model == "res_cls":
-        instance = ResClsModel()
+def create_solver(opt):
+    if opt.solver == 'res_cls':
+        instance = ResFaceClsSolver()
+    elif opt.solver == 'resface':
+        instance = ResFaceSolver()
     else:
-        instance = BaseModel()
+        instance = BaseSolver()
+
     instance.initialize(opt)
-    instance.setup()
     return instance
